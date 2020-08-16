@@ -21,17 +21,17 @@ public class CenterController {
 	@Autowired
 	CenterService centerService;
 	
-	@GetMapping("/getCenter")
+	@GetMapping("/Center")
 	public List<Center> getCenter(){
 		return centerService.getCenter();
 	}
 	
-	@PostMapping("/addCenter")
+	@PostMapping("/Center")
 	public String addCenter(@RequestBody CenterDTO centerDTO){
 		return centerService.addCenter(centerDTO);
 	}
 	
-	@DeleteMapping("/deleteCenter/{id}")
+	@DeleteMapping("/Center/{id}")
 	public ResponseEntity<String> deleteCenter(@PathVariable Long id) {
 		return ResponseEntity.ok(centerService.deleteCenter(id));
 	}

@@ -18,7 +18,7 @@ public class CenterService implements ICenterService{
 
 	@Override
 	public List<Center> getCenter() {
-		return this.centerRepository.findAll();
+		return this.centerRepository.findAll();	
 	}
 
 	@Override

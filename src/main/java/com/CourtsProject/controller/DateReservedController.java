@@ -26,12 +26,12 @@ public class DateReservedController {
 	@Autowired
 	CourtService courtService;
 	
-	@GetMapping("/getDateReserved")
+	@GetMapping("/DateReserved")
 	public List<DateReserved> getDateReserved(){
 		return this.dateReservedService.getDateReserved();
 	}
 	
-	@PostMapping("/addDateReserved/{idCourt}")
+	@PostMapping("/DateReserved/{idCourt}")
 	public String addDateReserved(@RequestBody DateReservedDTO dateReservedDTO, @PathVariable Long idCourt) {
 		System.out.println("idcourt: "+ idCourt);
 		Optional<Court> court = courtService.findById(idCourt);
@@ -41,7 +41,7 @@ public class DateReservedController {
 		return this.dateReservedService.addDateReserved(dateReservedDTO, court.get());
 	}
 	
-	@DeleteMapping("/deleteDateReserved/{id}")
+	@DeleteMapping("/DateReserved/{id}")
 	public String deleteDateReserved(@PathVariable Long id) {
 		return this.courtService.deleteCourt(id);
 	}
