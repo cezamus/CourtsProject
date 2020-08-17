@@ -1,6 +1,7 @@
 package com.CourtsProject.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,18 +22,23 @@ public class CenterController {
 	@Autowired
 	CenterService centerService;
 	
-	@GetMapping("/Center")
+	@GetMapping("/centers")
 	public List<Center> getCenter(){
 		return centerService.getCenter();
 	}
 	
-	@PostMapping("/Center")
+	@PostMapping("/centers")
 	public String addCenter(@RequestBody CenterDTO centerDTO){
 		return centerService.addCenter(centerDTO);
 	}
 	
-	@DeleteMapping("/Center/{id}")
+	@DeleteMapping("/centers/{id}")
 	public ResponseEntity<String> deleteCenter(@PathVariable Long id) {
+		Optional<Center> center = this.centerService.findById(id);
+		if(center.isEmpty()) {
+//			ResponseEntity.notFound();
+//			return "No center with id: " + id.toString() + "has been found.";
+		}
 		return ResponseEntity.ok(centerService.deleteCenter(id));
 	}
 }

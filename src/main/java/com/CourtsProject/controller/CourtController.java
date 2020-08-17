@@ -24,12 +24,12 @@ public class CourtController {
 	@Autowired
 	CenterService centerService;
 	
-	@GetMapping("/Court")
+	@GetMapping("/courts")
 	public List<Court> getCourt(){
 		return this.courtService.getCourt();
 	}
 	
-	@PostMapping("/Court/{idCenter}")
+	@PostMapping("/courts/{idCenter}")
 	public String addCourt(@PathVariable Long idCenter){
 		
 		Optional<Center> center = this.centerService.findById(idCenter);
@@ -39,7 +39,7 @@ public class CourtController {
 		return this.courtService.addCourt(center.get());
 	}
 	
-	@DeleteMapping("/Court/{id}")
+	@DeleteMapping("/courts/{id}")
 	public String deleteCourt(@PathVariable Long id){
 		return this.courtService.deleteCourt(id);
 	}
