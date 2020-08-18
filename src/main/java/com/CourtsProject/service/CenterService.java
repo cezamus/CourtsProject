@@ -27,7 +27,7 @@ public class CenterService implements ICenterService{
 				.location(centerDTO.getLocation())
 				.build();
 		this.centerRepository.save(center);
-		return "Added";
+		return "New center's id = " + center.getId().toString();
 	}
 
 	@Override
@@ -37,9 +37,9 @@ public class CenterService implements ICenterService{
 
 	@Override
 	public String deleteCenter(Long id) {
+	    String location = this.centerRepository.findById(id).get().getLocation();
 		this.centerRepository.deleteById(id);
-		return "Deleted";
+		return "Center in " + location + " has been deleted.";
 	}
-
 }
 

@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,17 +32,22 @@ public class CourtController {
 	}
 	
 	@PostMapping("/courts/{idCenter}")
-	public String addCourt(@PathVariable Long idCenter){
-		
+	public ResponseEntity<String> addCourt(@PathVariable Long idCenter){
 		Optional<Center> center = this.centerService.findById(idCenter);
 		if(center.isEmpty()) {
-			return "Center with this id doesn't exist";
+			return new ResponseEntity<String>("Center with id = " + idCenter.toString() + " has not been found.",
+					HttpStatus.NOT_FOUND);
 		}
-		return this.courtService.addCourt(center.get());
+		return ResponseEntity.ok(courtService.addCourt(center.get()));
 	}
 	
 	@DeleteMapping("/courts/{id}")
-	public String deleteCourt(@PathVariable Long id){
-		return this.courtService.deleteCourt(id);
+	public ResponseEntity<String> deleteCourt(@PathVariable Long id){
+		Optional<Court> court = this.courtService.findById(id);
+		if(court.isEmpty()) {
+			return new ResponseEntity<String>("Court with id = " + id.toString() + " has not been found.",
+					HttpStatus.NOT_FOUND);
+		}
+		return ResponseEntity.ok(courtService.deleteCourt(id));
 	}
 }

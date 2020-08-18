@@ -28,7 +28,7 @@ public class CourtService implements ICourtService{
 				.build();
 		
 		this.courtRepository.save(court);
-		return "Added";
+		return "Court with id = " + court.getId().toString() + " has been added in " + center.getLocation() + ".";
 	}
 
 	@Override
@@ -38,10 +38,8 @@ public class CourtService implements ICourtService{
 
 	@Override
 	public String deleteCourt(Long id) {
+		String centerLocation = this.courtRepository.findById(id).get().getCenter().getLocation();
 		this.courtRepository.deleteById(id);
-		return "Delete";
+		return "Court in " + centerLocation + " has been deleted";
 	}
-
-
-
 }

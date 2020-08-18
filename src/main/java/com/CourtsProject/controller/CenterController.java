@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,8 +37,8 @@ public class CenterController {
 	public ResponseEntity<String> deleteCenter(@PathVariable Long id) {
 		Optional<Center> center = this.centerService.findById(id);
 		if(center.isEmpty()) {
-//			ResponseEntity.notFound();
-//			return "No center with id: " + id.toString() + "has been found.";
+			return new ResponseEntity<String>("Center with id = " + id.toString() + " has not been found.",
+					HttpStatus.NOT_FOUND);
 		}
 		return ResponseEntity.ok(centerService.deleteCenter(id));
 	}
