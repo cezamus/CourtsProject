@@ -12,20 +12,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @Table(name = "court")
 @Builder(toBuilder = true)
 public class Court {
@@ -43,5 +40,5 @@ public class Court {
 	@JsonIgnore
 	@Transient 
 	@OneToMany(mappedBy = "court")
-    private Set<DateReserved> dateReserved = new HashSet<>();
+    private Set<DateReserved> datesReserved = new HashSet<>();
 }
