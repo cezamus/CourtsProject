@@ -31,9 +31,11 @@ The project has been created according to standards such as:
 In order to run the application a local database server is required.
 After starting the application it is running on port 8080. This and
 other database properties can be checked or changed in file 
-"application.properties". The Application can be used via internet
+application.properties. The Application can be used via internet
 browser (displaying data from the database) or programs like Postman
-(any action). Making any actions requires the user to login first.
-Valid username and password for current version of the application are:
-* username - "test"
-* password - "test".
+(any action). Making any actions requires using a valid token.
+To access the token user must call post request with 
+address "localhost:8080/authenticate" 
+and body (raw) ""username": "test", "password": "test"".
+Since this moment every request must be provided with header with
+authorisation key and value "Bearer [token]".
